@@ -3,7 +3,7 @@ from airflow.operators.empty import EmptyOperator
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
-from custom_operator import HelloOperator
+from practices.custom_operator import HelloOperator
 
 from airflow.utils.trigger_rule import TriggerRule
 
