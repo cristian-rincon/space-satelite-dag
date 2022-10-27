@@ -1,8 +1,8 @@
+from datetime import datetime
+
 from airflow import DAG
 from airflow.operators.bash import BashOperator
-from airflow.operators.python import PythonOperator, BranchPythonOperator
-
-from datetime import datetime
+from airflow.operators.python import BranchPythonOperator, PythonOperator
 
 default_args = {
     "owner": "airflow",
@@ -14,6 +14,7 @@ def _choose(**context):
     if int(context["task_instance"].xcom_pull(task_ids="task_1")) > 150:
         return "task_3"
     return "task_4"
+
 
 with DAG(
     dag_id="branching_dag",
@@ -33,7 +34,6 @@ with DAG(
         task_id="task_branch",
         python_callable=_choose,
     )
-    
 
     t3 = BashOperator(
         task_id="task_3",

@@ -1,13 +1,12 @@
+from datetime import datetime, timedelta
+
 from airflow import DAG
-from airflow.operators.empty import EmptyOperator
 from airflow.operators.bash import BashOperator
+from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import PythonOperator
-
-from practices.custom_operator import HelloOperator
-
 from airflow.utils.trigger_rule import TriggerRule
 
-from datetime import datetime, timedelta
+from practices.custom_operator import HelloOperator
 
 with DAG(
     dag_id="sandbox_dag",
@@ -26,7 +25,7 @@ with DAG(
         bash_command="echo 'Hello Airflow with BashOperator!'",
         trigger_rule=TriggerRule.ALL_SUCCESS,
     )
-    
+
     # PythonOperator
 
     def print_hello():

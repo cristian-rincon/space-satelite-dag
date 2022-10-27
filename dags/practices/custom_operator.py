@@ -1,5 +1,6 @@
 from airflow.models.baseoperator import BaseOperator
 
+
 class HelloOperator(BaseOperator):
     def __init__(self, name, **kwargs):
         super().__init__(**kwargs)

@@ -1,6 +1,7 @@
+from datetime import datetime
+
 from airflow import DAG
 from airflow.operators.bash import BashOperator
-from datetime import datetime
 from airflow.sensors.external_task import ExternalTaskSensor
 
 with DAG(
@@ -18,5 +19,3 @@ with DAG(
         allowed_states=["success"],
         poke_interval=5,
     )
-
-
