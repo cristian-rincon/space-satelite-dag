@@ -1,7 +1,8 @@
+from datetime import datetime
+
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
-from datetime import datetime
 
 default_args = {
     "owner": "airflow",
@@ -11,6 +12,7 @@ default_args = {
 
 def pass_value(**context):
     print(context["task_instance"].xcom_pull(task_ids="task_2"))
+
 
 with DAG(
     dag_id="xcoms_dag",
@@ -24,7 +26,6 @@ with DAG(
     t1 = BashOperator(
         task_id="task_1",
         bash_command="sleep 5 && echo $((3*50))",
-
     )
 
     t2 = BashOperator(
@@ -38,4 +39,3 @@ with DAG(
     )
 
     t1 >> t2 >> t3
-    
